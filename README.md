@@ -11,7 +11,6 @@ Modifictions from original Streamdiffusion codebase:
 - CPU FP16 image denormalization
 - Onnx generation with opset 14 for trt 8.5 compatibility
 - Maximum image size set to 640 due to Jetson memory limits
-- Added precompiled torch 2.1, torch-trt and onnxruntime-gpu whl files
 - use ```polygraphy == 0.45``` for VAE conversion
 
 
@@ -411,3 +410,144 @@ SD-Turbo is also available on [Hugging Face Space](https://huggingface.co/stabil
 <a href="https://github.com/cumulo-autumn/StreamDiffusion/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=cumulo-autumn/StreamDiffusion" />
 </a>
+
+## Pip list
+
+```
+Package                Version                 Editable project location
+---------------------- ----------------------- ----------------------------
+accelerate             0.25.0
+aiohttp                3.9.5
+aiosignal              1.3.1
+annotated-types        0.6.0
+antlr4-python3-runtime 4.9.3
+anyio                  4.3.0
+appdirs                1.4.4
+async-timeout          4.0.3
+attrs                  23.2.0
+blinker                1.8.2
+cbor2                  5.6.3
+certifi                2024.2.2
+charset-normalizer     3.3.2
+click                  8.1.7
+colored                1.4.4
+coloredlogs            15.0.1
+compel                 2.0.2
+controlnet-aux         0.0.7
+cuda-python            12.3.0
+datasets               2.20.0
+diffusers              0.24.0
+dill                   0.3.8
+docker                 7.0.0
+DockerHub-API          0.5
+einops                 0.8.0
+evaluate               0.4.2
+exceptiongroup         1.2.1
+fastapi                0.110.0
+filelock               3.12.2
+fire                   0.6.0
+Flask                  3.0.3
+flatbuffers            23.5.26
+frozenlist             1.4.1
+fsspec                 2023.6.0
+furl                   2.1.3
+h11                    0.14.0
+httptools              0.6.1
+huggingface-hub        0.23.0
+humanfriendly          10.0
+idna                   3.7
+imageio                2.34.1
+importlib-metadata     6.8.0
+itsdangerous           2.2.0
+Jinja2                 3.1.2
+lazy_loader            0.4
+luma                   12
+luma.core              2.4.2
+luma.oled              3.13.0
+markdown-it-py         3.0.0
+markdown2              2.4.13
+MarkupSafe             2.1.3
+mdurl                  0.1.2
+mpmath                 1.3.0
+multidict              6.0.5
+multiprocess           0.70.16
+networkx               3.1
+numpy                  1.24.4
+nvidia-pyindex         1.0.9
+omegaconf              2.3.0
+onediff                1.0.0
+oneflow                0.7.0
+onnx                   1.14.0
+onnx-graphsurgeon      0.3.26
+onnxruntime-gpu        1.15.1
+opencv-python          4.9.0.80
+optimum                1.21.2
+orderedmultidict       1.0.1
+packaging              23.1
+pandas                 2.0.3
+peft                   0.9.0
+pillow                 10.2.0
+pip                    24.0
+platformdirs           3.10.0
+polygraphy             0.45.0
+protobuf               4.23.4
+psutil                 5.9.8
+pyarrow                16.1.0
+pyarrow-hotfix         0.6
+pycparser              2.21
+pycuda                 2022.2.2
+pydantic               2.7.1
+pydantic_core          2.18.2
+pyftdi                 0.55.4
+Pygments               2.15.1
+pyparsing              3.0.9
+pyserial               3.5
+python-dateutil        2.9.0.post0
+python-dotenv          1.0.1
+python-rapidjson       1.10
+pytools                2023.1.1
+pytz                   2024.1
+pyusb                  1.2.1
+PyWavelets             1.4.1
+PyYAML                 6.0.1
+regex                  2023.6.3
+requests               2.32.3
+rich                   13.5.2
+RPi.GPIO               0.7.1
+safetensors            0.4.3
+scikit-image           0.21.0
+scipy                  1.10.1
+sentencepiece          0.2.0
+setuptools             69.5.1
+six                    1.16.0
+smbus2                 0.4.2
+sniffio                1.3.1
+spidev                 3.6
+stable-fast            1.0.5
+starlette              0.36.3
+streamdiffusion        0.1.1                   /home/nvidia/StreamDiffusion
+sympy                  1.12
+termcolor              2.4.0
+tifffile               2023.7.10
+timm                   1.0.3
+tokenizers             0.19.1
+torch                  2.1.0a0+41361538.nv23.6
+torch_tensorrt         1.4.0+7d1d80773
+torchvision            0.15.0
+tqdm                   4.66.4
+transformers           4.41.0
+tritonclient           2.35.0
+typing_extensions      4.11.0
+tzdata                 2024.1
+urllib3                2.2.1
+uvicorn                0.25.0
+uvloop                 0.19.0
+watchfiles             0.21.0
+websockets             12.0
+Werkzeug               3.0.3
+wget                   3.2
+wheel                  0.43.0
+xxhash                 3.4.1
+yarl                   1.9.4
+zipp                   3.16.2
+```
