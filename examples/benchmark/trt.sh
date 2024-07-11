@@ -1,0 +1,1 @@
+trtexec --onnx=unet.engine.opt.onnx --saveEngine=unet.engine --fp16 --minShapes=sample:1x4x64x64 --optShapes=sample:1x4x64x64 --maxShapes=sample:1x4x64x64 --workspace=12048 --verbose
