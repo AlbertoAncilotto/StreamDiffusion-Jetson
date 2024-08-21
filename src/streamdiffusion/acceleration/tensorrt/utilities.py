@@ -408,7 +408,7 @@ def build_engine(
         print(input_profile)
         print('Using MODIFIED TRT ENGINE BUILDING IN src/streamdiffusion/acceleration/tensorrt/utilities.py, line 409')
         [(b_min, c_min, h_min, w_min),(b_opt, c_opt, h_opt, w_opt), (b_max, c_max, h_max, w_max)] = input_profile['sample']
-        engine_build_cmd = f"trtexec --onnx={onnx_opt_path} --saveEngine={engine_path} --fp16 --minShapes=sample:{b_min}x{c_min}x{h_min}x{w_min} --optShapes=sample:{b_opt}x{c_opt}x{h_opt}x{w_opt} --maxShapes=sample:{b_max}x{c_max}x{h_max}x{w_max} --workspace=12048 --verbose"
+        engine_build_cmd = f"trtexec --onnx={onnx_opt_path} --saveEngine={engine_path} --fp16 --minShapes=sample:{b_min}x{c_min}x{h_min}x{w_min},timestep:{b_min},encoder_hidden_states:{b_min}x77x768 --optShapes=sample:{b_opt}x{c_opt}x{h_opt}x{w_opt},timestep:{b_opt},encoder_hidden_states:{b_opt}x77x768 --maxShapes=sample:{b_max}x{c_max}x{h_max}x{w_max},timestep:{b_max},encoder_hidden_states:{b_max}x77x768 --workspace=12048 --verbose"
         print('Running trtexec command:')
         print(engine_build_cmd)
         time.sleep(10)

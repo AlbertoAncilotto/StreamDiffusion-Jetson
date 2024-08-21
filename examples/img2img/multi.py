@@ -4,7 +4,7 @@ import sys
 from typing import Literal, Dict, Optional
 
 import fire
-
+import time
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 
@@ -16,18 +16,18 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 def main(
     input: str = os.path.join(CURRENT_DIR, "..", "..", "images", "inputs"),
     output: str = os.path.join(CURRENT_DIR, "..", "..", "images", "outputs"),
-    model_id_or_path: str = "KBlueLeaf/kohaku-v2.1",
+    model_id_or_path: str = "./vividWatercolors_10.safetensors",#"KBlueLeaf/kohaku-v2.1",
     lora_dict: Optional[Dict[str, float]] = None,
-    prompt: str = "1girl with brown dog hair, thick glasses, smiling",
+    prompt: str = "Cute, young, red hair, green eyes, attractive, pale skin, small lips, wtrcolor style, official art, frontal, smiling, symmetric, masterpiece, Beautiful, ((watercolor)), intricate details. Highly detailed, detailed eyes, Trending on artstation, impressionism",
     negative_prompt: str = "low quality, bad quality, blurry, low resolution",
     width: int = 512,
     height: int = 512,
-    acceleration: Literal["none", "xformers", "tensorrt"] = "xformers",
+    acceleration: Literal["none", "xformers", "tensorrt"] = "none",
     use_denoising_batch: bool = True,
-    guidance_scale: float = 1.2,
+    guidance_scale: float = 0.8,
     cfg_type: Literal["none", "full", "self", "initialize"] = "self",
     seed: int = 2,
-    delta: float = 0.5,
+    delta: float = 1.0,
 ):
     """
     Initializes the StreamDiffusionWrapper.
@@ -78,7 +78,7 @@ def main(
     stream = StreamDiffusionWrapper(
         model_id_or_path=model_id_or_path,
         lora_dict=lora_dict,
-        t_index_list=[32, 40, 45],
+        t_index_list=[21],
         frame_buffer_size=1,
         width=width,
         height=height,
@@ -93,7 +93,7 @@ def main(
     stream.prepare(
         prompt=prompt,
         negative_prompt=negative_prompt,
-        num_inference_steps=50,
+        num_inference_steps=30,
         guidance_scale=guidance_scale,
         delta=delta,
     )
@@ -109,10 +109,12 @@ def main(
 
     for image in images:
         outputs.append(image)
+        start = time.time()
         try:
             output_image = stream(image=image)
         except Exception:
             continue
+        print('Inference s:', time.time()-start)
 
         name = outputs.pop(0)
         basename = os.path.splitext(os.path.basename(name))[0]
