@@ -1,0 +1,36 @@
+% update packages
+sudo apt update
+
+% install conda and create environment
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
+chmod +x Miniconda3-latest-Linux-aarch64.sh
+./Miniconda3-latest-Linux-aarch64.sh
+conda create --name streamdiffusion python=3.8
+conda activate streamdiffusion
+
+% install jetson torch and onnxruntime
+wget https://developer.download.nvidia.com/compute/redist/jp/v512/pytorch/torch-2.1.0a0+41361538.nv23.06-cp38-cp38-linux_aarch64.whl
+wget https://nvidia.box.com/shared/static/3fechcaiwbtblznlchl6dh8uuat3dp5r.whl
+
+pip install torch-2.1.0a0+41361538.nv23.06-cp38-cp38-linux_aarch64.whl
+mv 3fechcaiwbtblznlchl6dh8uuat3dp5r.whl onnxruntime_gpu-1.18.0-cp38-cp38-linux_aarch64.whl
+pip install onnxruntime_gpu-1.18.0-cp38-cp38-linux_aarch64.whl
+
+% install dependencies
+sudo apt-get install libjpeg-dev
+sudo apt-get install libopenblas-dev
+sudo apt-get install tensorrt nvidia-tensorrt-dev python3-libnvinfer-dev
+
+pip install opencv-python
+pip install torchvision==0.14
+pip install polygraphy
+pip install onnx_graphsurgeon
+
+% copy the trt distribution that is bundled with Jetpack
+cp -r /usr/lib/python3.8/dist-packages/tensorrt /home/nvidia/miniconda3/envs/streamdiffusion/lib/python3.8/site-packages/
+pip3 install cuda-python
+alias trtexec="/usr/src/tensorrt/bin/trtexec"
+
+% clone and install
+git clone https://github.com/AlbertoAncilotto/StreamDiffusion-Jetson
+pip install -e .
