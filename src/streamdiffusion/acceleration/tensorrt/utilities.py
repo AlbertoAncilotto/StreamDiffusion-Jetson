@@ -221,11 +221,13 @@ class Engine:
         config_kwargs = {}
 
         if workspace_size > 0:
-            config_kwargs["memory_pool_limits"] = {trt.MemoryPoolType.WORKSPACE: workspace_size}
+            config_kwargs["memory_pool_limits"] = {trt.MemoryPoolType.WORKSPACE: int(workspace_size)}
         if not enable_all_tactics:
             config_kwargs["tactic_sources"] = []
 
+        # print('opts:',network_from_onnx_path(onnx_path), fp16, enable_refit, [p], timing_cache, timing_cache, config_kwargs)
 
+        # breakpoint()
         engine = engine_from_network(
             network_from_onnx_path(onnx_path), #flags=[trt.OnnxParserFlag.NATIVE_INSTANCENORM]
             config=CreateConfig(

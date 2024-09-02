@@ -10,8 +10,10 @@ from streamdiffusion.image_utils import postprocess_image
 import time
 from streamdiffusion.acceleration.tensorrt import accelerate_with_tensorrt
 
-PROMPT        = "Watercolor art, in the style of" 
-WIDTH, HEIGHT = 320,320
+import nanocamera as camera
+
+PROMPT        = "Watercolor art, in the style of, male, spiky hair" 
+WIDTH, HEIGHT = 384,384
 TORCH_DEVICE  = 'cuda' 
 TORCH_DTYPE   = torch.float16
 
@@ -53,11 +55,11 @@ stream = accelerate_with_tensorrt(
 
 # stream.enable_similar_image_filter()
 
-# cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 # Run the stream infinitely
-for _ in range(100):
-    ret, frame = True, np.random.randint(255, size=(768,512,3),dtype=np.uint8)
-    # ret, frame = cap.read()
+while True:
+    #ret, frame = True, np.random.randint(255, size=(768,512,3),dtype=np.uint8)
+    ret, frame = cap.read()
     frame = cv2.resize(frame, (768, 512))
     if not ret:
         print("Error: Failed to capture frame.")
@@ -75,9 +77,10 @@ for _ in range(100):
     rendered_image = postprocess_image(x_output, output_type="pil")[0]#.show()
 
     result_image[center_y:center_y+HEIGHT, center_x:center_x+WIDTH] = cv2.cvtColor(np.array(rendered_image), cv2.COLOR_RGB2BGR)
-
+    
+    result_image = cv2.resize(result_image, (1536, 1024))
     # Display output
-    # cv2.imshow("output", result_image)
+    cv2.imshow("output", result_image)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
